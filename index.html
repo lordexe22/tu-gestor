@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tu Gestor — Descargá la app</title>
+<meta name="description" content="Tu Gestor: una aplicación para agilizar la confección de trámites del automotor. Descargala para Windows.">
+<meta property="og:title" content="Tu Gestor">
+<meta property="og:description" content="Una aplicación para agilizar la confección de trámites del automotor. Descargala para Windows.">
+<meta property="og:image" content="icono.png">
+<meta name="theme-color" content="#1a1a2e">
+<link rel="icon" href="icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* La paleta y el estilo de la app (`src/styles/main.css`): el mismo fondo oscuro, el mismo acento, la misma letra y
+     las mismas tarjetas, para que quien la baja la reconozca al abrirla. */
+  :root {
+    --rgb-blanco: 255 255 255;
+    --rgb-negro: 0 0 0;
+    --rgb-acento: 83 168 245;
+    --rgb-exito: 52 196 124;
+    --rgb-aviso-texto: 245 192 106;
+    --acento: rgb(var(--rgb-acento));
+    --acento-texto: #9cc6f7;
+    --acento-oscuro: #0277bd;
+    --acento-2: rgb(var(--rgb-acento) / 0.12);
+    --acento-3: rgb(var(--rgb-acento) / 0.2);
+    --acento-4: rgb(var(--rgb-acento) / 0.4);
+    --exito: rgb(var(--rgb-exito));
+    --exito-oscuro: #2e7d32;
+    --exito-4: rgb(var(--rgb-exito) / 0.4);
+    --aviso-texto: rgb(var(--rgb-aviso-texto));
+    --fondo-1: #1a1a2e;
+    --fondo-2: #16213e;
+    --fondo-3: #0f3460;
+    --fondo-de-pagina: linear-gradient(135deg, var(--fondo-1) 0%, var(--fondo-2) 50%, var(--fondo-3) 100%);
+    --blanco: #ffffff;
+    --texto: #e0e0e0;
+    --texto-fuerte: #f2f4fb;
+    --texto-suave: #a0a0b0;
+    --texto-tenue: #8a8a9a;
+    --texto-sobre-claro: rgb(12 22 40);
+    --capa-3: rgb(var(--rgb-blanco) / 0.08);
+    --capa-4: rgb(var(--rgb-blanco) / 0.12);
+    --sombra-2: rgb(var(--rgb-negro) / 0.2);
+    --sombra-3: rgb(var(--rgb-negro) / 0.35);
+    --bloque-fondo: rgb(var(--rgb-blanco) / 0.04);
+    --bloque-borde: rgb(var(--rgb-blanco) / 0.16);
+    --bloque-sombra: 0 10px 28px var(--sombra-3), inset 0 1px 0 rgb(var(--rgb-blanco) / 0.06);
+    --radio: 8px;
+    --radio-grande: 10px;
+    --fuente: 'Roboto', 'Segoe UI', Tahoma, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--fuente);
+    color: var(--texto);
+    background: var(--fondo-1) var(--fondo-de-pagina) fixed;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--acento-texto); }
+  .contenedor { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* Encabezado */
+  header { padding: 18px 0; border-bottom: 1px solid var(--capa-3); }
+  header .contenedor { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .marca { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; color: var(--texto-fuerte); text-decoration: none; }
+  .marca img { width: 36px; height: 36px; border-radius: 22%; box-shadow: 0 2px 8px var(--sombra-2); }
+  header nav a { color: var(--texto-suave); text-decoration: none; font-size: .95rem; margin-left: 22px; transition: color .15s; }
+  header nav a:hover { color: var(--acento-texto); }
+
+  /* Portada */
+  .portada { padding: 56px 0 72px; background: radial-gradient(900px 420px at 80% 10%, var(--acento-2), transparent 65%); }
+  .portada .contenedor { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .etiqueta { display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--acento-texto); background: var(--acento-2); border: 1px solid var(--acento-3); padding: 5px 12px; border-radius: 999px; }
+  h1 { font-size: clamp(2rem, 4.6vw, 3rem); line-height: 1.14; margin: 18px 0; letter-spacing: -.015em; color: var(--texto-fuerte); font-weight: 800; }
+  h1 span { color: var(--acento); }
+  .bajada { font-size: 1.06rem; color: var(--texto-suave); margin: 0 0 32px; max-width: 36em; }
+
+  .descargar {
+    display: inline-flex; align-items: center; gap: 16px;
+    background: linear-gradient(135deg, var(--acento), var(--acento-oscuro));
+    color: var(--blanco); text-decoration: none;
+    padding: 18px 30px 18px 24px; border-radius: var(--radio-grande);
+    box-shadow: 0 8px 26px var(--acento-4);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .descargar:hover { transform: translateY(-2px); box-shadow: 0 12px 32px var(--acento-4); }
+  .descargar:active { transform: translateY(0); }
+  .descargar svg { width: 32px; height: 32px; flex: none; }
+  .descargar strong { display: block; font-size: 1.22rem; line-height: 1.2; font-weight: 700; }
+  .descargar small { display: block; font-size: .88rem; opacity: .88; margin-top: 3px; }
+  .requisitos { margin: 14px 0 0; font-size: .88rem; color: var(--texto-tenue); }
+
+  .vitrina { display: flex; justify-content: center; }
+  .vitrina img { width: min(300px, 70vw); height: auto; border-radius: 22%; box-shadow: 0 30px 60px var(--sombra-3), 0 0 0 1px var(--capa-4), 0 0 90px var(--acento-3); }
+
+  /* Secciones */
+  section { padding: 64px 0; }
+  .titulo-seccion { text-align: center; max-width: 640px; margin: 0 auto 40px; }
+  .titulo-seccion h2 { font-size: clamp(1.6rem, 3vw, 2rem); margin: 0 0 10px; color: var(--texto-fuerte); font-weight: 700; }
+  .titulo-seccion p { margin: 0; color: var(--texto-suave); font-size: 1.03rem; }
+
+  .funciones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .funcion { background: var(--bloque-fondo); border: 1px solid var(--bloque-borde); border-radius: var(--radio-grande); padding: 22px 22px 24px; box-shadow: var(--bloque-sombra); transition: border-color .15s, background-color .15s; }
+  .funcion:hover { border-color: var(--acento-4); background: var(--acento-2); }
+  .funcion .icono { width: 42px; height: 42px; border-radius: var(--radio); display: grid; place-items: center; background: var(--acento-3); color: var(--acento-texto); margin-bottom: 14px; }
+  .funcion .icono svg { width: 22px; height: 22px; }
+  .funcion h3 { margin: 0 0 6px; font-size: 1.05rem; color: var(--texto-fuerte); font-weight: 600; }
+  .funcion p { margin: 0; color: var(--texto-suave); font-size: .96rem; }
+
+  /* Pasos */
+  .instalar { background: rgb(var(--rgb-negro) / 0.18); border-top: 1px solid var(--capa-3); border-bottom: 1px solid var(--capa-3); }
+  .pasos { list-style: none; margin: 0 auto; padding: 0; display: grid; gap: 24px; max-width: 820px; }
+  .paso { display: grid; grid-template-columns: 46px 1fr; gap: 18px; align-items: start; }
+  .numero { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 1.15rem; color: var(--blanco); background: linear-gradient(135deg, var(--acento), var(--acento-oscuro)); box-shadow: 0 4px 14px var(--acento-4); }
+  .paso h3 { margin: 9px 0 4px; font-size: 1.1rem; color: var(--texto-fuerte); font-weight: 600; }
+  .paso p { margin: 0 0 8px; color: var(--texto-suave); }
+  .paso strong { color: var(--texto-fuerte); font-weight: 600; }
+
+  /* La ilustración del aviso de Windows va en los colores de Windows, para que se reconozca al verlo. */
+  .aviso-windows { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .ventana { background: #1c5aa8; color: #fff; border-radius: 6px; padding: 20px 20px 18px; font-family: 'Segoe UI', var(--fuente); position: relative; box-shadow: 0 10px 28px var(--sombra-3); min-height: 220px; display: flex; flex-direction: column; }
+  .ventana .titulo-ventana { font-size: 1.35rem; font-weight: 300; margin: 0 0 12px; line-height: 1.25; }
+  .ventana p { color: rgb(255 255 255 / .92); margin: 0 0 10px; font-size: .86rem; }
+  .ventana .enlace { color: #fff; text-decoration: underline; font-weight: 600; align-self: flex-start; font-size: .86rem; }
+  .ventana .datos { margin: 0 0 12px; font-size: .86rem; }
+  .ventana .datos div { color: rgb(255 255 255 / .92); }
+  .ventana .botones { margin-top: auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding-top: 10px; }
+  .ventana .boton { border: 1px solid rgb(255 255 255 / .85); padding: 6px 12px; font-size: .82rem; color: #fff; white-space: nowrap; }
+  .ventana .boton.solo { margin-left: auto; }
+  .resaltado { outline: 3px solid var(--aviso-texto); outline-offset: 3px; border-radius: 3px; animation: latido 1.8s ease-in-out infinite; }
+  @keyframes latido { 0%, 100% { outline-color: var(--aviso-texto); } 50% { outline-color: rgb(var(--rgb-aviso-texto) / .3); } }
+  .marca-paso { position: absolute; top: -12px; left: -12px; width: 30px; height: 30px; border-radius: 50%; background: var(--aviso-texto); color: var(--texto-sobre-claro); font-weight: 700; display: grid; place-items: center; box-shadow: 0 2px 6px var(--sombra-3); font-family: var(--fuente); }
+  .pie-ilustracion { font-size: .8rem; color: var(--texto-tenue); margin-top: 8px; text-align: center; }
+  .tranquilo { background: var(--acento-2); border: 1px solid var(--acento-3); border-radius: var(--radio); padding: 12px 16px; color: var(--texto); font-size: .95rem; margin-top: 14px; }
+
+  /* Contacto */
+  .contacto { text-align: center; }
+  .tarjeta-contacto { border: 1px solid var(--bloque-borde); border-radius: 16px; padding: 44px 28px; box-shadow: var(--bloque-sombra); background: radial-gradient(600px 240px at 50% 0%, var(--acento-2), transparent 70%), var(--bloque-fondo); }
+  .tarjeta-contacto h2 { margin: 0 0 8px; font-size: clamp(1.5rem, 3vw, 1.9rem); color: var(--texto-fuerte); font-weight: 700; }
+  .tarjeta-contacto p { margin: 0 auto 26px; max-width: 520px; color: var(--texto-suave); }
+  .whatsapp { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, var(--exito), var(--exito-oscuro)); color: var(--blanco); text-decoration: none; font-weight: 600; font-size: 1.05rem; padding: 15px 26px; border-radius: var(--radio-grande); box-shadow: 0 8px 22px var(--exito-4); transition: transform .15s ease; }
+  .whatsapp:hover { transform: translateY(-2px); }
+  .whatsapp svg { width: 26px; height: 26px; }
+  .numero-whatsapp { display: block; margin-top: 12px; font-size: .95rem; color: var(--texto-suave); }
+
+  footer { padding: 28px 0 40px; text-align: center; color: var(--texto-tenue); font-size: .86rem; border-top: 1px solid var(--capa-3); }
+
+  @media (max-width: 860px) {
+    .portada .contenedor { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+    .bajada { margin-inline: auto; }
+    .vitrina { order: -1; }
+    .vitrina img { width: 150px; }
+    .funciones { grid-template-columns: 1fr 1fr; }
+    .aviso-windows { grid-template-columns: 1fr; }
+    header nav { display: none; }
+  }
+  @media (max-width: 560px) {
+    .contenedor { padding: 0 16px; }
+    .funciones { grid-template-columns: 1fr; }
+    .descargar { width: 100%; justify-content: center; padding: 16px 18px; }
+    .paso { grid-template-columns: 38px 1fr; gap: 12px; }
+    .numero { width: 38px; height: 38px; font-size: 1rem; }
+    .paso h3 { margin-top: 6px; }
+    section { padding: 48px 0; }
+    .portada { padding: 36px 0 52px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .resaltado { animation: none; }
+    .descargar, .whatsapp, .funcion { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="contenedor">
+    <a class="marca" href="#"><img src="icono.png" alt="">Tu Gestor</a>
+    <nav>
+      <a href="#que-hace">Qué hace</a>
+      <a href="#instalar">Cómo se instala</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="portada">
+    <div class="contenedor">
+      <div>
+        <span class="etiqueta">Para gestoría del automotor</span>
+        <h1>Tus trámites del automotor, <span>en minutos y sin errores</span>.</h1>
+        <p class="bajada">Tu Gestor es una aplicación pensada para agilizar la confección de trámites del automotor.
+          Automatiza parte de la carga de datos para completar documentos, formularios y herramientas de los portales
+          oficiales de forma más rápida y eficiente, reduciendo los errores durante el proceso.</p>
+        <a class="descargar" id="descargar" href="https://github.com/lordexe22/tu-gestor/releases/latest/download/TuGestor-Setup.exe">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          <span><strong>Descargar para Windows</strong><small id="detalle-descarga">Última versión</small></span>
+        </a>
+        <p class="requisitos">Windows 10 u 11 de 64 bits · Se actualiza sola</p>
+      </div>
+      <div class="vitrina"><img src="icono.png" alt="Ícono de Tu Gestor: un auto con un documento firmado"></div>
+    </div>
+  </div>
+
+  <section id="que-hace">
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <h2>Qué hace por vos</h2>
+        <p>Lo repetitivo del trámite, resuelto desde un solo lugar.</p>
+      </div>
+      <div class="funciones">
+        <article class="funcion">
+          <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></svg></div>
+          <h3>Solicitudes Tipo listas para imprimir</h3>
+          <p>Genera plantillas de impresión con los datos del trámite para imprimir directamente sobre los formularios correspondientes.</p>
+        </article>
+        <article class="funcion">
+          <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16.2c.7-1.6 1.9-2.4 3.2-2.4s2.5.8 3.2 2.4"/><path d="M14.5 10h4M14.5 13.5h3"/></svg></div>
+          <h3>Precarga asistida de datos</h3>
+          <p>Extrae información directamente desde un DNI o un Título Digital, agilizando la carga de datos y ayudando a reducir errores.</p>
+        </article>
+        <article class="funcion">
+          <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/></svg></div>
+          <h3>Integración con portales externos</h3>
+          <p>Carga automáticamente el F. 1057 en la web de ARCA, consulta CUIL y completa el estimador de costos de la DNRPA, todo desde un navegador que podés ver en todo momento.</p>
+        </article>
+        <article class="funcion">
+          <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 11h2M12 11h2M8 15h2M12 15h2M8 18h2M12 18h4"/></svg></div>
+          <h3>Aranceles y sellos</h3>
+          <p>Calcula y estima rápidamente el presupuesto de un trámite, detallando cada uno de los conceptos que lo componen.</p>
+        </article>
+        <article class="funcion">
+          <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+          <h3>Tus datos, en tu computadora</h3>
+          <p>Las fichas de tus clientes y tus trámites se guardan en tu equipo. No se suben a ningún lado.</p>
+        </article>
+        <article class="funcion">
+          <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg></div>
+          <h3>Siempre al día</h3>
+          <p>Cuando sale una versión nueva, la app se actualiza sola. No tenés que volver a descargar nada.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="instalar" class="instalar">
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <h2>Cómo se instala</h2>
+        <p>Son tres pasos y se hace una sola vez.</p>
+      </div>
+      <ol class="pasos">
+        <li class="paso">
+          <span class="numero">1</span>
+          <div>
+            <h3>Descargá el instalador</h3>
+            <p>Tocá <strong>Descargar para Windows</strong>. Si el navegador avisa que el archivo no se descarga
+              habitualmente, elegí <strong>Conservar</strong>.</p>
+          </div>
+        </li>
+        <li class="paso">
+          <span class="numero">2</span>
+          <div>
+            <h3>Abrilo y pasá el aviso de Windows</h3>
+            <p>Al abrir el instalador, Windows muestra una ventana azul que dice <strong>«Windows protegió su PC»</strong>.
+              Tocá <strong>Más información</strong> y después <strong>Ejecutar de todos modos</strong>.</p>
+            <div class="aviso-windows" aria-hidden="true">
+              <div class="ventana">
+                <span class="marca-paso">1</span>
+                <div class="titulo-ventana">Windows protegió su PC</div>
+                <p>Microsoft Defender SmartScreen impidió el inicio de una aplicación no reconocida. Ejecutar esta aplicación podría poner su PC en riesgo.</p>
+                <span class="enlace resaltado">Más información</span>
+                <div class="botones"><span class="boton solo">No ejecutar</span></div>
+              </div>
+              <div class="ventana">
+                <span class="marca-paso">2</span>
+                <div class="titulo-ventana">Windows protegió su PC</div>
+                <div class="datos">
+                  <div>Aplicación: TuGestor-Setup.exe</div>
+                  <div>Editor: Editor desconocido</div>
+                </div>
+                <div class="botones"><span class="boton resaltado">Ejecutar de todos modos</span><span class="boton">No ejecutar</span></div>
+              </div>
+            </div>
+            <p class="pie-ilustracion">Ilustración de la ventana de Windows.</p>
+            <p class="tranquilo">Es normal: Windows avisa así con los programas nuevos que todavía no conoce. No hace
+              falta desactivar el antivirus ni cambiar nada de la computadora.</p>
+          </div>
+        </li>
+        <li class="paso">
+          <span class="numero">3</span>
+          <div>
+            <h3>Instalá y creá tu cuenta</h3>
+            <p>Seguí el instalador hasta el final. Cuando la app abre por primera vez, creá tu cuenta con tu correo: te
+              llega un código de 6 dígitos para confirmarla. Listo, ya podés trabajar.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contacto" class="contacto">
+    <div class="contenedor">
+      <div class="tarjeta-contacto">
+        <h2>¿Te trabaste en algún paso?</h2>
+        <p>Escribime por WhatsApp y lo resolvemos juntos.</p>
+        <a class="whatsapp" id="whatsapp" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+          Escribir por WhatsApp
+        </a>
+        <span class="numero-whatsapp" id="numero-whatsapp"></span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="contenedor">Tu Gestor · Para gestoría del automotor</div>
+</footer>
+
+<script>
+  // El número de WhatsApp, con código de país y sin espacios ni signos (Argentina: 549 + característica + número).
+  // Vacío, la sección de contacto no se muestra.
+  const WHATSAPP = '5493425546188';
+  const WHATSAPP_VISIBLE = '342 554-6188';
+  const MENSAJE = 'Hola, te escribo por Tu Gestor.';
+
+  const contacto = document.getElementById('whatsapp');
+  if (WHATSAPP) {
+    contacto.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(MENSAJE);
+    document.getElementById('numero-whatsapp').textContent = WHATSAPP_VISIBLE;
+  } else {
+    document.getElementById('contacto').hidden = true;
+  }
+
+  // El botón baja el instalador de la última versión publicada: GitHub redirige `latest/download/<nombre>` al de la
+  // versión vigente, por eso el instalador se publica con un nombre fijo (`artifactName` en package.json). Esta
+  // consulta sólo suma la versión y el tamaño; si GitHub no responde, el botón anda igual.
+  fetch('https://api.github.com/repos/lordexe22/tu-gestor/releases/latest', { headers: { Accept: 'application/vnd.github+json' } })
+    .then((respuesta) => (respuesta.ok ? respuesta.json() : Promise.reject(respuesta.status)))
+    .then((version) => {
+      const instalador = (version.assets || []).find((archivo) => /\.exe$/i.test(archivo.name));
+      if (!instalador) return;
+      document.getElementById('descargar').href = instalador.browser_download_url;
+      const mb = Math.round(instalador.size / 1048576);
+      document.getElementById('detalle-descarga').textContent = 'Versión ' + version.tag_name.replace(/^v/, '') + ' · ' + mb + ' MB';
+    })
+    .catch(() => {});
+</script>
+</body>
+</html>
